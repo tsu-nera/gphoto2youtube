@@ -1,0 +1,10 @@
+client_secrets.json
+token.pickle
+*.pyc
+__pycache__/
+*.mp4
+*.mov
+*.avi
+venv/
+tmp/
+concat_list.txt
