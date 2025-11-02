@@ -1,6 +1,6 @@
 # Google Photo to YouTube Uploader
 
-Google Photo からダウンロードした動画を YouTube に非公開でアップロードするツール
+Google Photo からダウンロードした動画を YouTube に限定公開でアップロードするツール
 
 ## セットアップ
 
@@ -66,19 +66,19 @@ python upload_to_youtube.py <動画ファイル> --title "動画のタイトル"
 
 - `--title`: 動画のタイトル（指定しない場合はファイル名を使用）
 - `--description`: 動画の説明
-- `--privacy`: 公開設定（`public`, `private`, `unlisted`のいずれか、デフォルト: `private`）
+- `--privacy`: 公開設定（`public`, `private`, `unlisted`のいずれか、デフォルト: `unlisted`）
 
 ### 例
 
 ```bash
-# 非公開動画としてアップロード（デフォルト）
+# 限定公開動画としてアップロード（デフォルト）
 python upload_to_youtube.py video.mp4
 
 # タイトルと説明を指定してアップロード
 python upload_to_youtube.py video.mp4 --title "私の動画" --description "テスト動画です"
 
-# 限定公開でアップロード
-python upload_to_youtube.py video.mp4 --privacy unlisted
+# 非公開でアップロード
+python upload_to_youtube.py video.mp4 --privacy private
 ```
 
 ## 初回実行時の認証

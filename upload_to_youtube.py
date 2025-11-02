@@ -40,7 +40,7 @@ def get_authenticated_service():
 
     return build('youtube', 'v3', credentials=credentials)
 
-def upload_video(youtube, video_file, title, description='', category='22', privacy_status='private'):
+def upload_video(youtube, video_file, title, description='', category='22', privacy_status='unlisted'):
     """
     YouTube に動画をアップロードする
 
@@ -93,9 +93,9 @@ def main():
     parser.add_argument('video_file', help='アップロードする動画ファイル')
     parser.add_argument('--title', default=None, help='動画のタイトル (デフォルト: ファイル名)')
     parser.add_argument('--description', default='', help='動画の説明')
-    parser.add_argument('--privacy', default='private',
+    parser.add_argument('--privacy', default='unlisted',
                        choices=['public', 'private', 'unlisted'],
-                       help='公開設定 (デフォルト: private)')
+                       help='公開設定 (デフォルト: unlisted)')
 
     args = parser.parse_args()
 
