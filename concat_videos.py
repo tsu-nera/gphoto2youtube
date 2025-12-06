@@ -126,8 +126,8 @@ def main():
     )
     parser.add_argument(
         '--output',
-        default='merged_video.mp4',
-        help='出力ファイル名 (デフォルト: merged_video.mp4)'
+        default='tmp/merged_video.mp4',
+        help='出力ファイル名 (デフォルト: tmp/merged_video.mp4)'
     )
     parser.add_argument(
         '--keep-list',

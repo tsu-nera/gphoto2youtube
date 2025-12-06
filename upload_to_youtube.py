@@ -28,8 +28,14 @@ def get_authenticated_service():
     # 有効な認証情報がない場合は新規に取得
     if not credentials or not credentials.valid:
         if credentials and credentials.expired and credentials.refresh_token:
-            credentials.refresh(Request())
-        else:
+            try:
+                credentials.refresh(Request())
+            except Exception:
+                # リフレッシュ失敗時はトークンを削除して再認証
+                os.remove('token.pickle')
+                credentials = None
+
+        if not credentials:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'client_secrets.json', SCOPES)
             credentials = flow.run_local_server(port=0)

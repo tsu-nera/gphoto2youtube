@@ -90,3 +90,4 @@ python upload_to_youtube.py video.mp4 --privacy private
 
 - YouTube API には1日あたりのアップロード上限があります
 - `client_secrets.json` と `token.pickle` は機密情報なので、Git にコミットしないように `.gitignore` に追加してください
+- OAuth同意画面が「テスト」モードの場合、認証トークンは7日間で失効します。`invalid_grant` エラーが発生した場合は `rm token.pickle` で再認証してください
