@@ -20,9 +20,12 @@ def get_authenticated_service():
     """YouTube API の認証を行い、サービスオブジェクトを返す"""
     credentials = None
 
+    client_secrets_path = os.path.expanduser('~/.config/google/client_secrets.json')
+    token_path = os.path.expanduser('~/.config/google/token.pickle')
+
     # token.pickle ファイルが存在する場合は読み込む
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    if os.path.exists(token_path):
+        with open(token_path, 'rb') as token:
             credentials = pickle.load(token)
 
     # 有効な認証情報がない場合は新規に取得
@@ -32,16 +35,17 @@ def get_authenticated_service():
                 credentials.refresh(Request())
             except Exception:
                 # リフレッシュ失敗時はトークンを削除して再認証
-                os.remove('token.pickle')
+                os.remove(token_path)
                 credentials = None
 
         if not credentials:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'client_secrets.json', SCOPES)
+                client_secrets_path, SCOPES)
             credentials = flow.run_local_server(port=0)
 
         # 認証情報を保存
-        with open('token.pickle', 'wb') as token:
+        os.makedirs(os.path.dirname(token_path), exist_ok=True)
+        with open(token_path, 'wb') as token:
             pickle.dump(credentials, token)
 
     return build('youtube', 'v3', credentials=credentials)

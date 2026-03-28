@@ -18,7 +18,7 @@ pip install -r requirements.txt
 4. 「API とサービス」→「認証情報」→「認証情報を作成」→「OAuth クライアント ID」を選択
 5. アプリケーションの種類として「デスクトップアプリ」を選択
 6. 作成された認証情報の JSON ファイルをダウンロード
-7. ダウンロードした JSON ファイルを `client_secrets.json` という名前でこのディレクトリに配置
+7. ダウンロードした JSON ファイルを `~/.config/google/client_secrets.json` として保存
 
 ## 使い方
 
@@ -89,5 +89,5 @@ python upload_to_youtube.py video.mp4 --privacy private
 ## 注意事項
 
 - YouTube API には1日あたりのアップロード上限があります
-- `client_secrets.json` と `token.pickle` は機密情報なので、Git にコミットしないように `.gitignore` に追加してください
+- `client_secrets.json` と `token.pickle` は `~/.config/google/` に配置するため、リポジトリには含まれません
 - OAuth同意画面が「テスト」モードの場合、認証トークンは7日間で失効します。`invalid_grant` エラーが発生した場合は `rm token.pickle` で再認証してください
